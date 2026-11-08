@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Órbita — A journey through the Solar System">Órbita — Viagem pelo Sistema Solar</title>
+  <meta name="description" content="Uma viagem interativa em 3D pelo Sistema Solar: planetas, luas, missões e a Via Láctea.">
+  <meta name="theme-color" content="#05060f">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='22' fill='%23ffb347'/><ellipse cx='50' cy='50' rx='44' ry='12' fill='none' stroke='%237aa2ff' stroke-width='5' transform='rotate(-20 50 50)'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="nebula" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#topo" class="logo"><span class="logo-dot"></span>ÓRBITA</a>
+    <nav>
+      <a href="#planetas" data-en="Planets">Planetas</a>
+      <a href="#missoes" data-en="Missions">Missões</a>
+      <a href="#numeros" data-en="Numbers">Números</a>
+      <div class="lang" role="group" aria-label="Idioma / Language"><button data-lang="pt">PT</button><button data-lang="en">EN</button></div>
+      <a href="via-lactea.html" class="btn btn-sm" data-en="Milky Way 3D">Via Láctea 3D</a>
+    </nav>
+  </header>
+
+  <main id="topo">
+    <!-- HERO 3D -->
+    <section class="hero">
+      <div id="solar" class="solar"></div>
+      <div id="labels" class="labels"></div>
+
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">// 0h 0m 0s · +0° 0′</p>
+          <h1 data-en="Beyond<br><span class='grad'>the horizon.</span>">Para além<br><span class="grad">do horizonte.</span></h1>
+          <p class="lead" data-en="Our little corner of the universe in 3D. Drag to rotate and click a planet — or a moon — to go there.">O nosso cantinho do universo em 3D. Arrasta para rodar e clica num planeta — ou numa lua — para lá ir.</p>
+          <div class="cta">
+            <a href="via-lactea.html" class="btn" data-en="Explore the Milky Way ✦">Explorar a Via Láctea ✦</a>
+            <a href="#planetas" class="btn btn-ghost" data-en="Meet the planets →">Conhecer os planetas →</a>
+          </div>
+        </div>
+
+        <aside class="info" id="info" aria-live="polite">
+          <button class="info-close" data-close data-en="← Back to the Sun">← Voltar ao Sol</button>
+          <p class="eyebrow" data-k="type"></p>
+          <h2 data-k="name"></h2>
+          <p class="info-facto" data-k="fact"></p>
+          <dl data-k="stats"></dl>
+          <div class="moons" data-k="moons"></div>
+        </aside>
+      </div>
+
+      <div class="dock" id="dock" role="toolbar" aria-label="Escolher corpo celeste" data-en-label="Choose a body"></div>
+    </section>
+
+    <!-- PLANETAS -->
+    <section id="planetas" class="section">
+      <header class="section-head reveal">
+        <p class="eyebrow" data-en="01 — Neighbourhood">01 — Vizinhança</p>
+        <h2 data-en="The planets">Os planetas</h2>
+        <p data-en="Click a card to see it in 3D.">Clica num cartão para o veres em 3D.</p>
+      </header>
+
+      <div class="grid planets">
+        <article class="card reveal" data-p="mercurio" style="--c1:#c9c3bb;--c2:#6b625a">
+          <div class="globe"></div>
+          <h3 data-en="Mercury">Mercúrio</h3>
+          <p data-en="The fastest one. A year lasts just 88 days, but a day lasts 176.">O mais rápido. Um ano dura só 88 dias, mas um dia dura 176.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="0.39 AU">0,39 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>0</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="venus" style="--c1:#ffd58a;--c2:#b8752c">
+          <div class="globe"></div>
+          <h3 data-en="Venus">Vénus</h3>
+          <p data-en="A 465 °C greenhouse hell that spins the opposite way to almost everyone else.">Estufa infernal a 465 °C e roda ao contrário de quase todos.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="0.72 AU">0,72 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>0</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="terra" style="--c1:#6fc3ff;--c2:#1b4f9c">
+          <div class="globe earth"></div>
+          <h3 data-en="Earth">Terra</h3>
+          <p data-en="Home. The only known place with coffee, pizza and life.">Casa. Único sítio conhecido com café, pizza e vida.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="1 AU">1 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>1</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="marte" style="--c1:#ff8a5c;--c2:#8c2f14">
+          <div class="globe"></div>
+          <h3 data-en="Mars">Marte</h3>
+          <p data-en="Home to Olympus Mons, nearly three times as tall as Everest.">Tem o Monte Olimpo, quase três vezes a altura do Evereste.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="1.52 AU">1,52 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>2</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="jupiter" style="--c1:#f2d2a9;--c2:#a0663b">
+          <div class="globe banded"></div>
+          <h3 data-en="Jupiter">Júpiter</h3>
+          <p data-en="A gas giant with a storm bigger than Earth that has raged for centuries.">Gigante gasoso com uma tempestade maior que a Terra há séculos.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="5.2 AU">5,2 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>95+</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="saturno" style="--c1:#f6e2b0;--c2:#b8975a">
+          <div class="globe ringed"></div>
+          <h3 data-en="Saturn">Saturno</h3>
+          <p data-en="The most famous rings in the system — and it would float in water.">Os anéis mais famosos do sistema — e flutuaria em água.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="9.5 AU">9,5 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>274</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="urano" style="--c1:#b6f3f5;--c2:#3c9fb0">
+          <div class="globe"></div>
+          <h3 data-en="Uranus">Úrano</h3>
+          <p data-en="Spins on its side, with seasons that last 21 years.">Gira deitado de lado, com estações que duram 21 anos.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="19.2 AU">19,2 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>29</dd></div></dl>
+        </article>
+        <article class="card reveal" data-p="neptuno" style="--c1:#7aa2ff;--c2:#1c2f8f">
+          <div class="globe"></div>
+          <h3 data-en="Neptune">Neptuno</h3>
+          <p data-en="2,000 km/h winds. The coldest and most distant of the eight.">Ventos de 2 000 km/h. O mais frio e distante dos oito.</p>
+          <dl><div><dt data-en="Distance">Distância</dt><dd data-en="30 AU">30 UA</dd></div><div><dt data-en="Moons">Luas</dt><dd>16</dd></div></dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- MISSÕES -->
+    <section id="missoes" class="section">
+      <header class="section-head reveal">
+        <p class="eyebrow" data-en="02 — Logbook">02 — Diário de bordo</p>
+        <h2 data-en="Missions that changed everything">Missões que mudaram tudo</h2>
+        <p data-en="Almost 70 years of leaving home.">Quase 70 anos a sair de casa.</p>
+      </header>
+
+      <div class="filters reveal" role="group" aria-label="Filtrar missões" data-en-label="Filter missions">
+        <button class="active" data-f="todas" data-en="All">Todas</button>
+        <button data-f="tripulada" data-en="👩‍🚀 Crewed">👩‍🚀 Tripuladas</button>
+        <button data-f="sonda" data-en="🛰️ Probes &amp; rovers">🛰️ Sondas &amp; robôs</button>
+        <button data-f="telescopio" data-en="🔭 Telescopes">🔭 Telescópios</button>
+      </div>
+
+      <ol class="timeline">
+        <li class="reveal" data-cat="sonda"><time>1957</time><div class="tl-card"><span class="tag" data-en="Satellite">Satélite</span><h3>Sputnik 1</h3><p data-en="The first artificial satellite. A “beep-beep” that kicked off the space race.">Primeiro satélite artificial. Um “bip-bip” que deu início à corrida espacial.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>1961</time><div class="tl-card"><span class="tag" data-en="Crewed">Tripulada</span><h3>Vostok 1</h3><p data-en="Yuri Gagarin becomes the first human in space: one lap of Earth in 108 minutes.">Iuri Gagarin torna-se o primeiro humano no espaço: uma volta à Terra em 108 minutos.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>1965</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Mariner 4</h3><p data-en="The first close-up photos of Mars. Goodbye, Martian canals.">Primeiras fotografias de perto de Marte. Adeus aos canais marcianos.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>1966</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Luna 9</h3><p data-en="The first soft landing on the Moon and the first photos from its surface.">Primeira aterragem suave na Lua e as primeiras fotos tiradas à superfície.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>1969</time><div class="tl-card"><span class="tag" data-en="Crewed">Tripulada</span><h3>Apollo 11</h3><p data-en="Armstrong and Aldrin walk on the Moon. 600 million people watch on TV.">Armstrong e Aldrin pisam a Lua. 600 milhões de pessoas a ver na TV.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>1970</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Venera 7</h3><p data-en="The first transmission from the surface of another planet — Venus, at 475 °C.">Primeira transmissão a partir da superfície de outro planeta — Vénus, a 475 °C.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>1971</time><div class="tl-card"><span class="tag" data-en="Station">Estação</span><h3>Salyut 1</h3><p data-en="The first space station in history.">A primeira estação espacial da história.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>1976</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Viking 1</h3><p data-en="Lands on Mars and keeps working there for more than six years.">Aterra em Marte e trabalha lá durante mais de seis anos.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>1977</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Voyager 1 &amp; 2</h3><p data-en="Still transmitting from beyond the heliosphere — the most distant human-made objects.">Ainda a transmitir, já fora da heliosfera — os objetos humanos mais distantes.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>1981</time><div class="tl-card"><span class="tag" data-en="Crewed">Tripulada</span><h3 data-en="Space Shuttle Columbia">Vaivém Columbia</h3><p data-en="The Space Shuttle's first flight — the first reusable spacecraft.">Primeiro voo do vaivém espacial, a primeira nave reutilizável.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>1986</time><div class="tl-card"><span class="tag" data-en="Station">Estação</span><h3>Mir</h3><p data-en="The first modular space station. It stayed in orbit for 15 years.">Primeira estação modular. Esteve 15 anos em órbita.</p></div></li>
+        <li class="reveal" data-cat="telescopio"><time>1990</time><div class="tl-card"><span class="tag" data-en="Telescope">Telescópio</span><h3>Hubble</h3><p data-en="The telescope that gave us the most iconic images of the cosmos.">O telescópio que nos deu as imagens mais icónicas do cosmos.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>1997</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Cassini–Huygens</h3><p data-en="13 years at Saturn; Huygens landed on Titan, the most distant landing ever.">13 anos em Saturno; a Huygens aterrou em Titã, a aterragem mais distante de sempre.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>1998</time><div class="tl-card"><span class="tag" data-en="Station">Estação</span><h3 data-en="International Space Station">Estação Espacial Internacional</h3><p data-en="Continuously inhabited since November 2000.">Habitada sem interrupção desde novembro de 2000.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2004</time><div class="tl-card"><span class="tag" data-en="Rover">Robô</span><h3>Spirit &amp; Opportunity</h3><p data-en="Rovers built for 90 days. Opportunity lasted 14 years.">Rovers feitos para 90 dias. O Opportunity aguentou 14 anos.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2006</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>New Horizons</h3><p data-en="A nine-year trip to show us Pluto's heart in 2015.">Nove anos de viagem para, em 2015, nos mostrar o coração de Plutão.</p></div></li>
+        <li class="reveal" data-cat="telescopio"><time>2009</time><div class="tl-card"><span class="tag" data-en="Telescope">Telescópio</span><h3>Kepler</h3><p data-en="Found thousands of exoplanets. Turns out planets are everywhere.">Descobriu milhares de exoplanetas. Afinal, planetas há por todo o lado.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2012</time><div class="tl-card"><span class="tag" data-en="Rover">Robô</span><h3>Curiosity</h3><p data-en="Lowered onto Mars by a “sky crane”. Still roaming today.">Desce em Marte pendurado num “guindaste voador”. Ainda anda por lá.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2014</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Rosetta &amp; Philae</h3><p data-en="The first landing on a comet, 500 million km from Earth.">Primeira aterragem num cometa, a 500 milhões de km da Terra.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2019</time><div class="tl-card"><span class="tag" data-en="Rover">Robô</span><h3>Chang’e 4</h3><p data-en="The first landing on the far side of the Moon.">Primeira aterragem no lado oculto da Lua.</p></div></li>
+        <li class="reveal" data-cat="telescopio"><time>2019</time><div class="tl-card"><span class="tag" data-en="Telescope">Telescópio</span><h3>Event Horizon Telescope</h3><p data-en="Dishes all over the planet working together for the first image of a black hole.">Antenas do planeta inteiro juntas para a primeira imagem de um buraco negro.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2021</time><div class="tl-card"><span class="tag" data-en="Rover">Robô</span><h3>Perseverance &amp; Ingenuity</h3><p data-en="Collecting samples on Mars — and Ingenuity makes the first powered flight on another planet.">Recolhe amostras em Marte — e o Ingenuity faz o primeiro voo motorizado noutro planeta.</p></div></li>
+        <li class="reveal" data-cat="telescopio"><time>2021</time><div class="tl-card"><span class="tag" data-en="Telescope">Telescópio</span><h3>James Webb</h3><p data-en="Infrared eyes, seeing the first galaxies in the universe.">Olhos no infravermelho, a ver as primeiras galáxias do universo.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2022</time><div class="tl-card"><span class="tag" data-en="Planetary defence">Defesa planetária</span><h3>DART</h3><p data-en="Crashes into an asteroid on purpose and changes its orbit. It worked.">Choca contra um asteroide de propósito e muda-lhe a órbita. Funcionou.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>2022</time><div class="tl-card"><span class="tag" data-en="Artemis programme">Programa Artemis</span><h3>Artemis I</h3><p data-en="The Orion capsule flies to the Moon and back: the dress rehearsal for taking people again.">A cápsula Orion vai à Lua e volta: o ensaio para levar pessoas outra vez.</p></div></li>
+        <li class="reveal" data-cat="sonda"><time>2024</time><div class="tl-card"><span class="tag" data-en="Probe">Sonda</span><h3>Europa Clipper</h3><p data-en="On its way to Europa, Jupiter's moon with an ocean hidden under the ice.">A caminho de Europa, a lua de Júpiter com um oceano escondido debaixo do gelo.</p></div></li>
+        <li class="reveal" data-cat="tripulada"><time>20??</time><div class="tl-card future"><span class="tag" data-en="Coming soon">Em breve</span><h3 data-en="Crewed Mars">Marte tripulado</h3><p data-en="The next giant leap. Who knows — maybe you'll be reading this from there.">O próximo grande salto. Quem sabe se não estás a ler isto de lá.</p></div></li>
+      </ol>
+    </section>
+
+    <!-- NÚMEROS -->
+    <section id="numeros" class="section">
+      <div class="stats reveal">
+        <div><strong data-count="4600">0</strong><span data-en="million years old">milhões de anos de idade</span></div>
+        <div><strong data-count="299792">0</strong><span data-en="km/s — the speed of light">km/s — velocidade da luz</span></div>
+        <div><strong data-count="200">0</strong><span data-en="billion stars in the Milky Way">mil milhões de estrelas na Via Láctea</span></div>
+        <div><strong data-count="8">0</strong><span data-en="light-minutes from the Sun to Earth">minutos de luz do Sol à Terra</span></div>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="section">
+      <div class="outro reveal">
+        <p class="eyebrow" data-en="03 — Pale blue dot">03 — Ponto pálido azul</p>
+        <h2 data-en="Everything we know<br>fits in one pixel.">Tudo o que conhecemos<br>cabe num pixel.</h2>
+        <p data-en="In 1990, Voyager 1 looked back from 6 billion km away and photographed Earth. A dot. It's all we have — and it's worth looking after.">Em 1990, a Voyager 1 olhou para trás a 6 mil milhões de km e fotografou a Terra. Um ponto. É tudo o que temos — e vale a pena cuidar dele.</p>
+        <a href="via-lactea.html" class="btn" data-en="See where we are in the galaxy ✦">Ver onde estamos na galáxia ✦</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>© <span id="ano"></span> Órbita · <span data-en="Made on Earth, with love.">Feito na Terra, com carinho.</span></p>
+    <a href="#topo" data-en="Back to top ↑">Voltar ao topo ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="module" src="solar.js"></script>
+</body>
+</html>

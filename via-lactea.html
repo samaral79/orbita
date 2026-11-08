@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-en="Milky Way 3D — Órbita">Via Láctea 3D — Órbita</title>
+  <meta name="description" content="A Via Láctea em 3D. Encontra o Sol, voa até à Terra e explora o Sistema Solar com as suas luas.">
+  <meta name="theme-color" content="#03040b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='22' fill='%23ffb347'/><ellipse cx='50' cy='50' rx='44' ry='12' fill='none' stroke='%237aa2ff' stroke-width='5' transform='rotate(-20 50 50)'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
+</head>
+<body class="page-explorer">
+  <header class="nav">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>ÓRBITA</a>
+    <nav>
+      <a href="index.html" data-en="Home">Início</a>
+      <a href="index.html#planetas" data-en="Planets">Planetas</a>
+      <a href="index.html#missoes" data-en="Missions">Missões</a>
+      <div class="lang" role="group" aria-label="Idioma / Language"><button data-lang="pt">PT</button><button data-lang="en">EN</button></div>
+      <a href="via-lactea.html" class="btn btn-sm current" aria-current="page" data-en="Milky Way 3D">Via Láctea 3D</a>
+    </nav>
+  </header>
+
+  <main class="explorer" data-mode="galaxy">
+    <div id="scene" class="scene" aria-label="Via Láctea e Sistema Solar em 3D"></div>
+    <div id="gal-labels" class="gal-labels"></div>
+    <div id="labels" class="labels"></div>
+
+    <!-- modo galáxia -->
+    <div class="ex-panel gal-panel">
+      <p class="eyebrow" data-en="// 100 000 light-years across">// 100 000 anos-luz de diâmetro</p>
+      <h1 data-en="The <span class='grad'>Milky Way</span>">A <span class="grad">Via Láctea</span></h1>
+      <p class="lead" data-en="Between 100 and 400 billion stars. Somewhere in a small side arm, 26,000 light-years from the centre, there's a perfectly ordinary star — ours.">Entre 100 e 400 mil milhões de estrelas. Algures num pequeno braço lateral, a 26 000 anos-luz do centro, há uma estrela perfeitamente banal — a nossa.</p>
+      <button class="btn" id="go-earth"><span data-en="Show Earth">Mostrar a Terra</span> 🌍</button>
+      <div class="systems-box">
+        <p class="systems-title" data-en="Or visit another planetary system">Ou visita outro sistema planetário</p>
+        <div class="systems" id="systems"></div>
+        <p class="systems-note" data-en="Distances between stars are exaggerated so you can see them.">As distâncias entre estrelas estão exageradas para se verem.</p>
+      </div>
+      <p class="hint" data-en="Drag to rotate · scroll to zoom">Arrasta para rodar · roda do rato para zoom</p>
+    </div>
+
+    <!-- modo sistema solar -->
+    <div class="ex-panel sol-panel">
+      <button class="info-close" id="back-galaxy" data-en="← Back to the Milky Way">← Voltar à Via Láctea</button>
+      <aside class="info" id="info" aria-live="polite">
+        <button class="info-close" data-close data-en="← Whole system">← Sistema inteiro</button>
+        <p class="eyebrow" data-k="type"></p>
+        <h2 data-k="name"></h2>
+        <p class="info-facto" data-k="fact"></p>
+        <dl data-k="stats"></dl>
+        <div class="moons" data-k="moons"></div>
+      </aside>
+    </div>
+    <div class="dock" id="dock" role="toolbar" aria-label="Escolher corpo celeste" data-en-label="Choose a body"></div>
+
+    <div class="warp" aria-hidden="true"></div>
+  </main>
+
+  <script type="module" src="via-lactea.js"></script>
+</body>
+</html>
